@@ -13,5 +13,10 @@ namespace Portal.Domain
         
         public Byte[] ImageData { get; set; }
         public DateTime TimeCreated { get; set; }
+
+        public int Price { get; set; }
+        public int CityId { get; set; }
+        public Guid UserId { get; set; }
+
     }
 }

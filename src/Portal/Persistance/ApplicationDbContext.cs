@@ -13,5 +13,6 @@ namespace Portal.Persistance
             : base(options)
         {
         }
+        public DbSet<Post> Posts { get; set; }
     }
 }
