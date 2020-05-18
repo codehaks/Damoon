@@ -46,7 +46,8 @@ namespace Portal.Web
                 .AddRazorRuntimeCompilation()
               .AddRazorPagesOptions(options =>
               {
-                  options.Conventions.AuthorizeFolder("/user");
+                  
+                  options.Conventions.AuthorizeAreaFolder("user","/");
                   options.Conventions.AuthorizeAreaFolder("admin", "/", "RequireAdminRole");
               });
         }

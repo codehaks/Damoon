@@ -17,7 +17,6 @@
     },
     "Portal.Web": {
       "commandName": "Project",
-      "commandLineArgs": "init",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
