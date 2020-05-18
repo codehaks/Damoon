@@ -56,6 +56,15 @@ namespace Polaris.Api.Controllers
             return Ok(post);
         }
 
+        [HttpGet("user/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<Post>> GetByUser(string userId)
+        {
+            var post = await _db.Posts.Where(p=>p.UserId==userId).ToListAsync();
+            return Ok(post);
+        }
+
         [Route("{id}")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
