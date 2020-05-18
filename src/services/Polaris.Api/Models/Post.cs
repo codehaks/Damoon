@@ -13,5 +13,7 @@ namespace Polaris.Api.Models
 
         public Byte[] ImageData { get; set; }
         public DateTime TimeCreated { get; set; }
+
+        public string UserId { get; set; }
     }
 }
