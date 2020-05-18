@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
+using Portal.Web.Common;
 
 namespace Portal.Web.Areas.User.Pages.Posts
 {
@@ -19,6 +20,7 @@ namespace Portal.Web.Areas.User.Pages.Posts
         public async Task<IActionResult> OnPost()
         {
             var client = new HttpClient();
+            Post.UserId = User.GetUserId();
             var data = JsonConvert.SerializeObject(Post);
             var response = await client.PostAsync("http://localhost:5501/api/post", new StringContent(data, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
@@ -32,6 +34,8 @@ namespace Portal.Web.Areas.User.Pages.Posts
         {
             [MaxLength(100)]
             public string Name { get; set; }
+
+            public string UserId { get; set; }
 
             [MaxLength(256)]
             public string Description { get; set; }
