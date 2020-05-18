@@ -31,24 +31,38 @@ namespace Polaris.Api.Controllers
 
             _db.Add(post);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = post.Id }, post);
+            return CreatedAtAction(nameof(Get), new { id = post.Id }, post);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Post>> Update([FromBody] Post post)
+        {
+            var model = await _db.Posts.FindAsync(post.Id);
+            model.Name = post.Name;
+            model.Description = post.Description;
+            _db.Update(model);
+            await _db.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = post.Id }, post);
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Post>> GetAll()
+        public async Task<ActionResult<Post>> Get()
         {
             var post = await _db.Posts.ToListAsync();
             return Ok(post);
         }
 
-        [HttpGet("api/[controller]/{id}")]
+        [Route("{id}")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Post>> GetById(string id)
+        public async Task<ActionResult<Post>> Get(string id)
         {
-            var post = await _db.Posts.FindAsync(id);
+            var post = await _db.Posts.FindAsync(Guid.Parse(id));
             return Ok(post);
         }
     }

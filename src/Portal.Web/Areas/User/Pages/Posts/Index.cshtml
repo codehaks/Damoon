@@ -17,6 +17,7 @@
         <tr>
             <th>Name</th>
             <th>Desc.</th>
+            <th></th>
          
         </tr>
     </thead>
@@ -26,6 +27,9 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Description</td>
+                <td>
+                    <a class="btn btn-primary" asp-page="edit" asp-route-id="@item.Id">Edit</a>
+                </td>
              
             </tr>
         }
