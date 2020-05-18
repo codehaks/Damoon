@@ -23,16 +23,17 @@ namespace Polaris.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Post>> Create(Post post)
+        public async Task<ActionResult<Post>> Create([FromBody]Post post)
         {
             post.Id = Guid.NewGuid();
+            post.TimeCreated = DateTime.Now;
 
             _db.Add(post);
             await _db.SaveChangesAsync();
             return CreatedAtAction(nameof(GetById), new { id = post.Id }, post);
         }
 
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Post>> GetById(string id)
