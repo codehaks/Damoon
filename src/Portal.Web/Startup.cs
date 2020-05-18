@@ -20,31 +20,38 @@ namespace Portal.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration; 
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                            .AddDefaultUI()
+                            .AddEntityFrameworkStores<ApplicationDbContext>()
+                            .AddDefaultTokenProviders();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
+            });
 
             services.AddRazorPages()
-                .AddRazorRuntimeCompilation();
-              //.AddRazorPagesOptions(options =>
-              //{
-              //    options.Conventions.AuthorizeFolder("/user");
-              //    options.Conventions.AuthorizeAreaFolder("admin", "/", "RequireAdminRole");
-              //});
+                .AddRazorRuntimeCompilation()
+              .AddRazorPagesOptions(options =>
+              {
+                  options.Conventions.AuthorizeFolder("/user");
+                  options.Conventions.AuthorizeAreaFolder("admin", "/", "RequireAdminRole");
+              });
         }
 
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -55,7 +62,7 @@ namespace Portal.Web
             else
             {
                 app.UseExceptionHandler("/Error");
-                
+
                 app.UseHsts();
             }
 
