@@ -7,8 +7,8 @@ namespace Portal.Services.Ratings.Api.Data
 {
     public class PostRating
     {
-        public Guid PostId { get; set; }
-        public Guid UserId { get; set; }
+        public string PostId { get; set; }
+        public string UserId { get; set; }
         public DateTime TimeCreated { get; set; }
         public int Rate { get; set; }
     }

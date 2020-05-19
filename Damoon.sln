@@ -13,9 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{69
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polaris.Api", "src\services\Polaris.Api\Polaris.Api.csproj", "{ACD1D3F1-0636-40BF-86E0-65163C067D00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dziban.Api", "src\services\Dziban.Api\Dziban.Api.csproj", "{DEFF0DE5-9C1A-4868-9B04-FB4E4D8CBAFF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Services.Rating.Worker", "src\services\Portal.Services.Rating.Worker\Portal.Services.Rating.Worker.csproj", "{FA3BB404-A274-43AF-8372-60FED1C270FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Services.Rating.Worker", "src\services\Portal.Services.Rating.Worker\Portal.Services.Rating.Worker.csproj", "{FA3BB404-A274-43AF-8372-60FED1C270FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{ACD1D3F1-0636-40BF-86E0-65163C067D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD1D3F1-0636-40BF-86E0-65163C067D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACD1D3F1-0636-40BF-86E0-65163C067D00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DEFF0DE5-9C1A-4868-9B04-FB4E4D8CBAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEFF0DE5-9C1A-4868-9B04-FB4E4D8CBAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEFF0DE5-9C1A-4868-9B04-FB4E4D8CBAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEFF0DE5-9C1A-4868-9B04-FB4E4D8CBAFF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FA3BB404-A274-43AF-8372-60FED1C270FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA3BB404-A274-43AF-8372-60FED1C270FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA3BB404-A274-43AF-8372-60FED1C270FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,7 +45,6 @@ Global
 		{B0C504B7-0FEB-44F5-AD1C-6D827CCDFEC0} = {5AC776F2-8197-411C-AE7F-F51CE0D82D66}
 		{AF6419CF-B590-47B0-8312-4922E459D513} = {5AC776F2-8197-411C-AE7F-F51CE0D82D66}
 		{ACD1D3F1-0636-40BF-86E0-65163C067D00} = {6988856C-3DC5-437F-BE2F-F9128536B4BC}
-		{DEFF0DE5-9C1A-4868-9B04-FB4E4D8CBAFF} = {6988856C-3DC5-437F-BE2F-F9128536B4BC}
 		{FA3BB404-A274-43AF-8372-60FED1C270FD} = {6988856C-3DC5-437F-BE2F-F9128536B4BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

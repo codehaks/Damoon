@@ -21,6 +21,7 @@ namespace Portal.Services.Rating.Worker
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
+                    services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
                     services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.sqlite"));
                 });
     }

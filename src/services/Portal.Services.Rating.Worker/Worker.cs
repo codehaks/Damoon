@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -18,40 +19,36 @@ namespace Portal.Services.Rating.Worker
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly AppDbContext _db;
-        public Worker(ILogger<Worker> logger, AppDbContext db)
+
+        public IServiceProvider Services { get; }
+
+        public Worker(ILogger<Worker> logger, IServiceProvider services)
         {
             _logger = logger;
-            _db = db;
+   
+            Services = services;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            var connection = factory.CreateConnection();
-            var channel = connection.CreateModel();
+            await DoWork(stoppingToken);
 
-            channel.QueueDeclare(queue: "post_rate", durable: false, exclusive: false, autoDelete: false, arguments: null);
-
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += Consumer_Received;
-
-            channel.BasicConsume(queue: "post_rate", autoAck: true, consumer: consumer);
-
-            await Task.CompletedTask;
+            
         }
 
-        private async void Consumer_Received(object sender, BasicDeliverEventArgs e)
+        private async Task DoWork(CancellationToken stoppingToken)
         {
-            
-            var body = e.Body;
-            var message = Encoding.UTF8.GetString(body);
-            _logger.LogInformation(message);
-            var model = JsonConvert.DeserializeObject<PostRating>(message);
-            _db.PostRatings.Add(model);
-            await _db.SaveChangesAsync();
-            _logger.LogInformation("Save to database", model);
-            
+            _logger.LogInformation(
+                "Consume Scoped Service Hosted Service is working.");
+
+            var scope = Services.CreateScope();
+            var scopedProcessingService =
+                scope.ServiceProvider
+                    .GetRequiredService<IScopedProcessingService>();
+
+            await scopedProcessingService.DoWork(stoppingToken);
         }
+
+        
     }
 }
