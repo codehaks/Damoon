@@ -27,6 +27,8 @@ namespace Portal.Web.Controllers
         public IActionResult Post([FromBody] PostRatingModel model)
         {
             model.UserId = User.GetUserId();
+            //model.Rating = 3;
+
             var factory = new ConnectionFactory() { HostName = "localhost" };
 
             using var connection = factory.CreateConnection();

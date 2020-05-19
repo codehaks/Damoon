@@ -54,6 +54,8 @@ namespace Portal.Services.Rating.Worker
             var message = Encoding.UTF8.GetString(body);
             _logger.LogInformation(message);
             var model = JsonConvert.DeserializeObject<PostRating>(message);
+            model.TimeCreated = DateTime.Now;
+
             _db.PostRatings.Add(model);
             await _db.SaveChangesAsync();
             _logger.LogInformation("Save to database", model);
