@@ -13,6 +13,20 @@
     {
       "library": "font-awesome@5.13.0",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "toastr.js@2.1.4",
+      "destination": "wwwroot/lib/toastr/",
+      "files": [
+        "toastr.min.js",
+        "toastr.css",
+        "toastr.js.map",
+        "toastr.min.css"
+      ]
+    },
+    {
+      "library": "vue@2.6.11",
+      "destination": "wwwroot/lib/vue/"
     }
   ]
 }

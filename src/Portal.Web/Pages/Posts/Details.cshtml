@@ -7,4 +7,60 @@
 <h2>@Model.Post.Name</h2>
 <p>@Model.Post.Description</p>
 
+<div id="app">
+    <div class="form-inline">
+        <select class="form-control w-25" v-model="rating">
+            <option value="0" selected>Stars...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary" v-on:click.prevent="addPostRating">Submit</button>
+        <a asp-page="index" class="btn btn-link">Back to list</a>
+    </div>
+</div>
+
+@section styles{ 
+    <link href="~/lib/toastr/toastr.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                rating:3
+            },
+            mounted: function () {
+                // Get rating
+            },
+            methods: {
+                addPostRating: function () {
+                    alert("Done!");
+                    var vm = this;
+                    var newRating = {
+                        posId: "@Model.Post.Id",
+                        rating: vm.description
+                    };
+                    $.ajax({ url: "/api/post/rating", data: newRating, method: "POST" })
+                        .done(function (data) {
+                            toastr.success("Post rated!");
+                        }).fail(function () {
+                           
+                        }).always(function () {
+                            
+                        });
+   
+                },
+            }
+        });
+    </script>
+
+}
+
 

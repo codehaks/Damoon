@@ -26,12 +26,12 @@ namespace Portal.Services.Rating.Worker
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
 
-            channel.QueueDeclare(queue: "inbox", durable: false, exclusive: false, autoDelete: false, arguments: null);
+            channel.QueueDeclare(queue: "post_rate", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += Consumer_Received;
 
-            channel.BasicConsume(queue: "inbox", autoAck: true, consumer: consumer);
+            channel.BasicConsume(queue: "post_rate", autoAck: true, consumer: consumer);
 
             await Task.CompletedTask;
         }
