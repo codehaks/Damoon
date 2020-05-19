@@ -23,7 +23,7 @@
     </div>
 </div>
 
-@section styles{ 
+@section styles{
     <link href="~/lib/toastr/toastr.css" rel="stylesheet" />
 }
 
@@ -41,21 +41,30 @@
             },
             methods: {
                 addPostRating: function () {
-                    alert("Done!");
+                    //alert("Done!");
                     var vm = this;
+
                     var newRating = {
-                        posId: "@Model.Post.Id",
-                        rating: vm.description
+                        "postId": "@Model.Post.Id",
+                        "userId":"123",
+                        "rating": 3
                     };
-                    $.ajax({ url: "/api/post/rating", data: newRating, method: "POST" })
+
+                    $.ajax({
+                        url: "/api/post/rating",
+                        contentType: "application/json",
+                        //dataType: "json",
+                        data: JSON.stringify(newRating),
+                        method: "POST"
+                    })
                         .done(function (data) {
                             toastr.success("Post rated!");
-                        }).fail(function () {
-                           
+                        }).fail(function (err) {
+                            console.log(err);
                         }).always(function () {
-                            
+
                         });
-   
+
                 },
             }
         });

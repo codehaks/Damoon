@@ -42,6 +42,7 @@ namespace Portal.Web
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
             });
 
+            services.AddControllers();
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation()
               .AddRazorPagesOptions(options =>
@@ -64,10 +65,10 @@ namespace Portal.Web
             {
                 app.UseExceptionHandler("/Error");
 
-                app.UseHsts();
+                //app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -78,6 +79,7 @@ namespace Portal.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }
