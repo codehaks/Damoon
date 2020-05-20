@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Polaris.Api.Migrations
 {
-    public partial class Init : Migration
+    public partial class PostTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,10 +12,13 @@ namespace Polaris.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CityId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    ImageData = table.Column<byte[]>(nullable: true),
-                    TimeCreated = table.Column<DateTime>(nullable: false)
+                    TimeCreated = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    State = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
