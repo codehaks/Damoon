@@ -32,14 +32,20 @@ namespace Portal.Web.Areas.User.Pages.Posts
 
         public class PostCreateModel
         {
+            [Required]
+            public int CityId { get; set; }
+            [Required]
+            public int CategoryId { get; set; }
+
             [MaxLength(100)]
+            [Required]
             public string Name { get; set; }
+            
+            [MaxLength(256)]
+            [Required]
+            public string Description { get; set; }
 
             public string UserId { get; set; }
-
-            [MaxLength(256)]
-            public string Description { get; set; }
-            public Byte[] ImageData { get; set; }
         }
 
     }

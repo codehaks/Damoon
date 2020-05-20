@@ -25,7 +25,8 @@ namespace Polaris.Api.Models
     public enum PostState
     {
         Active = 0,
-        Archived = 1,
-        Banned = 2
+        Banned = 1,
+        Archived = 2,
+
     }
 }

@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal", "src\Portal\Portal
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6988856C-3DC5-437F-BE2F-F9128536B4BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polaris.Api", "src\services\Polaris.Api\Polaris.Api.csproj", "{ACD1D3F1-0636-40BF-86E0-65163C067D00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostsService", "src\services\Polaris.Api\PostsService.csproj", "{ACD1D3F1-0636-40BF-86E0-65163C067D00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Services.Rating.Worker", "src\services\Portal.Services.Rating.Worker\Portal.Services.Rating.Worker.csproj", "{FA3BB404-A274-43AF-8372-60FED1C270FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatingService", "src\services\Portal.Services.Rating.Worker\RatingService.csproj", "{FA3BB404-A274-43AF-8372-60FED1C270FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

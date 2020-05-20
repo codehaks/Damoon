@@ -40,8 +40,12 @@ namespace Polaris.Api.Controllers
         public async Task<ActionResult<Post>> Update([FromBody] Post post)
         {
             var model = await _db.Posts.FindAsync(post.Id);
+
             model.Name = post.Name;
             model.Description = post.Description;
+            model.CityId = post.CityId;
+            model.CategoryId = post.CategoryId;
+
             _db.Update(model);
             await _db.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = post.Id }, post);
@@ -61,7 +65,7 @@ namespace Polaris.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Post>> GetByUser(string userId)
         {
-            var post = await _db.Posts.Where(p=>p.UserId==userId).ToListAsync();
+            var post = await _db.Posts.Where(p => p.UserId == userId).ToListAsync();
             return Ok(post);
         }
 
