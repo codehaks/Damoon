@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Portal.Services.Ratings.Api.Data;
 using Portal.Services.Ratings.Worker.Data;
@@ -18,7 +19,7 @@ namespace Portal.Services.Rating.Worker
         Task DoWork(CancellationToken stoppingToken);
     }
 
-    
+
 
     internal class ScopedProcessingService : IScopedProcessingService
     {
@@ -55,8 +56,16 @@ namespace Portal.Services.Rating.Worker
             _logger.LogInformation(message);
             var model = JsonConvert.DeserializeObject<PostRating>(message);
             model.TimeCreated = DateTime.Now;
+            var item = await _db.PostRatings.FirstOrDefaultAsync(p => p.PostId == model.PostId && p.UserId == model.UserId);
+            if (item == null)
+            {
+                _db.PostRatings.Add(model);
+            }
+            else
+            {
+                item.Rate = model.Rate;
+            }
 
-            _db.PostRatings.Add(model);
             await _db.SaveChangesAsync();
             _logger.LogInformation("Save to database", model);
 

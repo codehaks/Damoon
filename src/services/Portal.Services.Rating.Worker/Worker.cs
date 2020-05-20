@@ -31,9 +31,7 @@ namespace Portal.Services.Rating.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await DoWork(stoppingToken);
-
-            
+            await DoWork(stoppingToken);            
         }
 
         private async Task DoWork(CancellationToken stoppingToken)
