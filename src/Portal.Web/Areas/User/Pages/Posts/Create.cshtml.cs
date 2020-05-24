@@ -8,8 +8,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Portal.Web.Common;
+
 
 namespace Portal.Web.Areas.User.Pages.Posts
 {
@@ -17,12 +19,20 @@ namespace Portal.Web.Areas.User.Pages.Posts
 
     public class CreateModel : PageModel
     {
+        public CreateModel(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         public async Task<IActionResult> OnPost()
         {
             var client = new HttpClient();
+            client.BaseAddress = Configuration.GetServiceUri("api");
             Post.UserId = User.GetUserId();
             var data = JsonConvert.SerializeObject(Post);
-            var response = await client.PostAsync("http://localhost:5501/api/post", new StringContent(data, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync("/api/post", new StringContent(data, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             return RedirectToPage("/index");
         }
